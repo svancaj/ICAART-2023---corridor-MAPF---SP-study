@@ -71,7 +71,7 @@
 \lstset{%
   xleftmargin=5mm,
   framexleftmargin=5mm}
-  
+
 \newtheorem{prop}{Proposition}
 
 \input{macro}
@@ -88,13 +88,12 @@
 \affiliation{\sup{1}Charles University, Prague, Czech Republic}
 \affiliation{\sup{2}University of Potsdam, Potsdam, Germany}
 \affiliation{\sup{3}Potassco Solutions, Potsdam, Germany}
-\email{svancara@ktiml.mff.cuni.cz, phil@cs.uni-potsdam.de, husarmatej@gmail.com, bartak@ktiml.mff.cuni.cz, torsten@cs.uni-potsdam.de}
+\email{svancara@ktiml.mff.cuni.cz} % , phil@cs.uni-potsdam.de, husarmatej@gmail.com, bartak@ktiml.mff.cuni.cz, torsten@cs.uni-potsdam.de}
 }
-
 
 \keywords{Multi-agent Pathfinding, Answer set programming, Subgraph, Shortest path}
 
-\abstract{Multi-agent pathfinding is the task of navigating a set of agents in a shared environment from their start locations to their desired goal locations without collisions. Solving this problem optimally is a hard task and various algorithms have been devised. The algorithms can be in general split into two categories -- search-based and reduction-based. It is known that reduction-based algorithms struggle with large instances in terms of the size of the map (shared environment). A recent study tried to mitigate this drawback by pruning some vertices of the map. The pruning is done based on the vicinity to a shortest path of an agent. In this paper, we study the effect of choosing such shortest paths. We provide several approaches to choosing the paths and we perform an experimental study to see the effect on the runtime.}
+\abstract{Multi-agent pathfinding is the task of navigating a set of agents in a shared environment from their start locations to their desired goal locations without collisions. Solving this problem optimally is a hard task and various algorithms have been devised. The algorithms can generally be split into two categories, search- and reduction-based ones. It is known that reduction-based algorithms struggle with large instances in terms of the size of the environment. A recent study tried to mitigate this drawback by pruning some vertices of the environment map. The pruning is done based on the vicinity to a shortest path of an agent. In this paper, we study the effect of choosing such shortest paths. We provide several approaches to choosing the paths and we perform an experimental study to see the effect on the runtime.}
 
 \onecolumn \maketitle \normalsize \setcounter{footnote}{0} \vfill
 
@@ -121,3 +120,7 @@ DFG grant SCHA 550/15, Germany.
 
 \end{document}
 
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

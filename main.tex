@@ -1,0 +1,123 @@
+\documentclass[a4paper,twoside]{article}
+
+\usepackage{epsfig}
+\usepackage{subcaption}
+\usepackage{calc}
+\usepackage{amssymb}
+\usepackage{amstext}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{multicol}
+\usepackage{pslatex}
+\usepackage{apalike}
+\usepackage[bottom]{footmisc}
+\usepackage{SCITEPRESS}     % Please add other packages that you may need BEFORE the SCITEPRESS.sty package.
+
+\usepackage{algorithm}
+%\usepackage{algorithmic}
+\usepackage{algpseudocode}
+
+%
+% These are are recommended to typeset listings but not required. See the subsubsection on listing. Remove this block if you don't have listings in your paper.
+\usepackage{newfloat}
+\usepackage{listings}
+\lstset{%
+	basicstyle={\footnotesize\ttfamily},% footnotesize acceptable for monospace
+	numbers=left,numberstyle=\footnotesize,xleftmargin=2em,% show line numbers, remove this entire line if you don't want the numbers.
+	aboveskip=0pt,belowskip=0pt,%
+	showstringspaces=false,tabsize=2,breaklines=true}
+\floatstyle{ruled}
+\newfloat{listing}{tb}{lst}{}
+\floatname{listing}{Listing}
+
+
+\usepackage{caption}
+\usepackage{subcaption}
+
+\usepackage{multirow}
+
+\usepackage{footmisc}
+
+\usepackage{amsthm}
+\usepackage{amsmath}
+% \usepackage{amssymb}
+\usepackage{url}\urlstyle{tt}
+
+\usepackage{listings}
+\lstdefinelanguage{clingo}{%
+  keywordstyle=[1]\usefont{OT1}{cmtt}{sb}{n},%
+  keywordstyle=[2]\textbf,%
+  keywordstyle=[3]\usefont{OT1}{cmtt}{m}{n},%
+  alsoletter={\#,\&},%
+  keywords=[1]{not,from,import,def,if,else,elif,return,while,break,and,or,for,in,del,and,class,with,print,as,is},%
+  keywords=[2]{\#const,\#show,\#minimize,\#base,\#theory,\#count,\#external,\#program,\#script,\#end,\#heuristic,\#edge,\#project,\#show,\#sum},%
+  keywords=[3]{&,&dom,&sum,&diff,&show},%
+  literate=~{$\sim$}2,%
+  morecomment=[l]{\#\ },%
+  morecomment=[l]{\%\ },%
+  morestring=[b]",%
+  stringstyle={\textit},%
+  commentstyle={\color{darkgray}}%
+}
+\lstset{%
+  numbers=left,
+  numberblanklines=false,
+  basicstyle=%
+  \ttfamily%
+  \lst@ifdisplaystyle\scriptsize\fi,
+  language=clingo}
+\lstset{escapeinside={*@}{@*}}
+% Fix for twocolumn margins
+\lstset{%
+  xleftmargin=5mm,
+  framexleftmargin=5mm}
+  
+\newtheorem{prop}{Proposition}
+
+\input{macro}
+
+\begin{document}
+
+\title{Multi-agent Pathfinding on Large Maps Using Graph Pruning:\\This Way or That Way?}
+
+%\author{Paper \#41}
+
+
+\author{
+\authorname{Jiří Švancara\sup{1}\orcidAuthor{0000-0002-6275-6773}, Philipp Obermeier\sup{2,}\sup{3}\orcidAuthor{0000-0001-6346-4855}, Matej Husár\sup{1}, Roman Barták\sup{1}\orcidAuthor{0000-0002-6717-8175} and Torsten Schaub\sup{2,}\sup{3}\orcidAuthor{0000-0002-7456-041X}}
+\affiliation{\sup{1}Charles University, Prague, Czech Republic}
+\affiliation{\sup{2}University of Potsdam, Potsdam, Germany}
+\affiliation{\sup{3}Potassco Solutions, Potsdam, Germany}
+\email{svancara@ktiml.mff.cuni.cz, phil@cs.uni-potsdam.de, husarmatej@gmail.com, bartak@ktiml.mff.cuni.cz, torsten@cs.uni-potsdam.de}
+}
+
+
+\keywords{Multi-agent Pathfinding, Answer set programming, Subgraph, Shortest path}
+
+\abstract{Multi-agent pathfinding is the task of navigating a set of agents in a shared environment from their start locations to their desired goal locations without collisions. Solving this problem optimally is a hard task and various algorithms have been devised. The algorithms can be in general split into two categories -- search-based and reduction-based. It is known that reduction-based algorithms struggle with large instances in terms of the size of the map (shared environment). A recent study tried to mitigate this drawback by pruning some vertices of the map. The pruning is done based on the vicinity to a shortest path of an agent. In this paper, we study the effect of choosing such shortest paths. We provide several approaches to choosing the paths and we perform an experimental study to see the effect on the runtime.}
+
+\onecolumn \maketitle \normalsize \setcounter{footnote}{0} \vfill
+
+\input{01introduction}
+\input{02definitions}
+\input{03ASP}
+\input{04corridors}
+\input{05chooseSP}
+\input{06experiments}
+\input{07conclusion}
+
+%\vfill
+\section*{\uppercase{Acknowledgements}}
+Research is supported by
+project P103-19-02183S of the Czech Science Foundation, % may be deleted
+the Czech-USA Cooperative Scientific Research Project LTAUSA19072, and
+DFG grant SCHA 550/15, Germany.
+
+
+\bibliographystyle{apalike}
+{\small
+\bibliography{example}}
+
+
+\end{document}
+

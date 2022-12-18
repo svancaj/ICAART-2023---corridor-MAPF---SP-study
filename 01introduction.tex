@@ -1,13 +1,19 @@
 \section{Introduction}
 
-In this paper, we study the problem of Multi-agent pathfinding (MAPF). The task is to navigate a set of agents in a shared environment (map) from starting locations to the desired goal locations such that there are no collisions~\cite{DBLP:conf/aiide/Silver05}. This problem has numerous practical applications in robotics, logistics, digital entertainment, automatic warehousing and more, and it has attracted significant focus from various research communities in recent years~\cite{sven_lifelong,DBLP:conf/ijcai/Surynek19,ngobsoscye17a,geobscra18a}.
+We study the problem of Multi-agent pathfinding (MAPF). The task is to navigate a set of agents in a shared environment (map) from starting locations to the desired goal locations such that there are no collisions~\cite{DBLP:conf/aiide/Silver05}. This problem has numerous practical applications in robotics, logistics, digital entertainment, automatic warehousing and more, and it has attracted significant focus from various research communities in recent years~\cite{sven_lifelong,DBLP:conf/ijcai/Surynek19,ngobsoscye17a,geobscra18a}.
 
-The optimal MAPF solvers can be in general split into two categories -- search-based and reduction-based. The former algorithms search over possible locations or conflicts among the agents, the latter reduce the problem to some other well-defined formalism such as Answer Set Programming (ASP)~\cite{geobotscsangso18a}. While it is not always the case, it is generally established that each of the approaches dominates on different types of instances~\cite{DBLP:journals/access/GomezHB21,DBLP:conf/icaart/SvancaraB19}. The search-based solvers are easily able to find solutions on large sparsely populated maps while having trouble dealing with small densely populated maps. On the other hand, the reduction-based solvers are able to deal with the small densely populated maps but are unable to find a solution for large maps even with a small number of agents.
+Optimal MAPF solvers can generally be split into two categories, search- and reduction-based ones. The former search
+over possible locations or conflicts among agents, while the latter reduce the problem to other formalisms, such as Answer Set Programming (ASP)~\cite{geobotscsangso18a}. While it is not always the case, it is generally established that each of the approaches dominates on different types of instances~\cite{DBLP:journals/access/GomezHB21,DBLP:conf/icaart/SvancaraB19}. The search-based solvers are easily able to find solutions on large sparsely populated maps while having trouble dealing with small densely populated maps. On the other hand, the reduction-based solvers are able to deal with the small densely populated maps but are unable to find a solution for large maps even with a small number of agents.
 
-\subsection{Contributions}
-
-Since the reduction-based solvers have trouble solving instances on large maps, a recent study~\cite{AAMAS_corridors} proposed techniques to prune the map of vertices that are most likely not needed to solve the instance. The pruning is done based on a random shortest path for each agent. Only the vertices around the selected path are considered and the other vertices are removed from the instance, creating a much simpler problem. In this paper, we extend the original study by examining the behavior of the technique by using more than just one shortest path for each agent. First, we describe the four strategies of pruning the graph (map) from the original study, then we introduce the four new approaches to select the paths for each agent as a novel contribution of this paper.
+% \textbf{Contributions.}
+%
+Since reduction-based solvers have trouble solving large instances, a recent study~\cite{AAMAS_corridors} proposed techniques to remove vertices from the map that are most likely not needed to solve the instance. The pruning is done based on a random shortest path for each agent. Only vertices around the selected path are considered and other vertices are removed, creating a much simpler problem. In this paper, we extend the original study by examining the behavior of the technique by using more than just one shortest path for each agent. First, we describe the four pruning strategies from the original study, and then we introduce four new ones to select paths for each agent.
 
 %\subsection{Structure of the paper}
 
 %The paper is structured as follows. First, we establish formal definitions used in MAPF, then we introduce the ASP encoding we used as our reduction-based MAPF solver. In section~\ref{sec:subgraph}, we describe the sub-graph method from~\cite{AAMAS_corridors}. In section~\ref{sec:SP}, we describe our contribution of choosing the shortest paths for each agent. Lastly, we perform experimental evaluation of all of the different approaches.
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End:

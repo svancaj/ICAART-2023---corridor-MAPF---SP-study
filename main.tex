@@ -64,13 +64,16 @@
   numberblanklines=false,
   basicstyle=%
   \ttfamily%
-  \lst@ifdisplaystyle\scriptsize\fi,
+  % \lst@ifdisplaystyle\scriptsize\fi,
+    \lst@ifdisplaystyle\small\fi,
   language=clingo}
 \lstset{escapeinside={*@}{@*}}
 % Fix for twocolumn margins
 \lstset{%
   xleftmargin=5mm,
   framexleftmargin=5mm}
+
+\makeatletter\lst@AddToHook{OnEmptyLine}{\vspace{\dimexpr-\baselineskip+\medskipamount\relax}}\makeatother
 
 \newtheorem{prop}{Proposition}
 

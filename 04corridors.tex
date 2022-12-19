@@ -186,7 +186,7 @@ If a MAPF instance $\inst$ has a solution, \emph{prune-and-cut} strategy finds a
 
 \textbf{Combined Strategy.}
 %
-The drawback of the \emph{prune-and-cut} strategy is that in the case the makespan needs to be increased, we first increase $k$ up to $k_{max}$ before increasing $m$. To mitigate this problem, we present the \emph{combined} strategy (\ssc{} for short). The initial candidate is again $k=0$ and $m=0$. If the relaxed instance is unsolvable, we increase both $k=k+1$ and $m=m+1$ at the same time. This way, we save solver calls because we do not need to explore all of the possible reductions in the $k$ direction. On the other hand, this strategy is no longer optimal. Figure~\ref{fig:p_counterexample} with blue agent choosing the blue path is a counterexample.
+The drawback of the \emph{prune-and-cut} strategy is that in the case the makespan needs to be increased, we first increase $k$ up to $k_{max}$ before increasing $m$. To mitigate this problem, we present the \emph{combined} strategy (\ssc{} for short). The initial candidate is again $k=0$ and $m=0$. If the relaxed instance is unsolvable, we increase both $k=k+1$ and $m=m+1$ at the same time. This way, we save solver calls because we do not need to explore all of the possible reductions in the $k$ direction. On the other hand, this strategy is no longer optimal. Figure~\ref{fig:p_counterexample}, with the blue agent choosing the blue path, is a counterexample.
 %
 \begin{prop}\cite{AAMAS_corridors}
 If a MAPF instance $\inst$ has a solution, \emph{combined} strategy is guaranteed to find a solution (completeness) but not necessarily an optimal one.

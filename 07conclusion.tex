@@ -1,5 +1,10 @@
 \section{Conclusion}
 
 We extended the study on pruning maps to increase the efficiency of reduction-based MAPF solvers. In the original paper, only one random path was chosen for each agent to build a restricted graph. Conversely, in this paper, we proposed several approaches to choosing multiple different paths for each agent, providing the underlying solver with more choices. In theory, this should make it possible for the agents to avoid collisions more easily. In our experiments, we found that this rarely happens and that it is more beneficial to provide the solver with just one random path making the relaxed instances simpler for the cost of possibly having to solve more relaxations. Thus, we showed that the original approach is justified, a result that is lacking in the original study.
-
-On the other hand, we also showed, that providing the agents with more possible paths leads more often to an optimal solution when using one of the suboptimal strategies.
+%
+On the other hand, we also showed that providing the agents with more possible paths leads more often to an optimal solution when using one of the suboptimal strategies.
+%
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End:

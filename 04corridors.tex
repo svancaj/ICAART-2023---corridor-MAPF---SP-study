@@ -1,11 +1,10 @@
 \section{The Sub-Graph Method}
 \label{sec:subgraph}
 
-\subsection{Motivation}
+% \subsection{Motivation}
 
-
-Both of the improvements mentioned in the last section maintain completeness and optimality. However, there are situations, where too many possibilities for the agent's location remain, which may overwhelm the underlying solver. The motivation from~\cite{AAMAS_corridors} can be seen in Figure~\ref{fig:diagonal}. The agent is placed on a 4-connected grid map going from one corner to the diagonally opposite corner. With just one agent and no obstacles, there are $\binom{2(N-1)}{N-1}$ possible shortest paths if the size of the grid is $N \times N$. As seen in the figure, the preprocessing correctly finds at what timesteps the agent can be located at which vertices. However, the number of choices for the solver is still too large. The proposition is to pick just one of the shortest paths and treat the other vertices as an impassable obstacle. Hence, for these vertices, there are no variables entering the solver. Such pruning of the graph can be seen in Figure~\ref{fig:diagonal_path}.
-
+Both of the above improvements maintain completeness and optimality. However, there are situations, where too many possibilities for an agent's location remain, which may overwhelm the underlying solver. The motivation of~\cite{AAMAS_corridors} can be seen in Figure~\ref{fig:diagonal}. The agent is placed on a 4-connected grid going from one corner to the diagonally opposite corner. With just one agent and no obstacles, there are $\binom{2(N-1)}{N-1}$ possible shortest paths on an $N \times N$ grid. As shown in the figure, preprocessing finds out at what timesteps the agent can be located at which vertices. However, the number of choices is still too large for the solver. The idea is to pick just one of the shortest paths and to treat the other vertices as impassable obstacles. So, for these vertices, no variables enter the solver. This pruning is shown in Figure~\ref{fig:diagonal_path}.
+%
 \begin{figure}[ht]
 \centering
 \hspace{0.9cm}
@@ -26,10 +25,9 @@ Both of the improvements mentioned in the last section maintain completeness and
 \caption{An agent moving on a grid map from a corner to the opposite one. The numbers represent at what timesteps the agent can reach the given vertex.}
 \label{fig:diagonal_example}
 \end{figure}
-
-
+%
 %Another example where this approach is helpful can be seen in Figure~\ref{fig:two_agents}. The two agents have different lengths of shortest paths. For the orange agent with the longer path, preprocessing correctly finds the only shortest path. However, the blue agent with a much shorter path may move anywhere in the shaded area since it has enough time. Recall that we are computing makespan optimal solutions, so we are interested in the timestep when all agents are at their goal locations. This time is prolonged by the orange agent, therefore the blue agent has many more choices. If we use our pruning technique the number of choices reduces dramatically. The blue agent can still choose when to move to the goal location, or even move back and forth a few times, however, it may use significantly fewer vertices.
-
+%
 %\begin{figure}[ht]
 %\centering
 %\hspace{0.8cm}
@@ -51,18 +49,16 @@ Both of the improvements mentioned in the last section maintain completeness and
 %\label{fig:two_agents_example}
 %\end{figure}
 
-
-
-Of course, this pruning does not maintain completeness in general. A simple counterexample can be seen in Figure~\ref{fig:m_counterexample}. The two agents want to swap their location (ie. their goal location is identical with the starting location of the other agent). To do this, the only solution is for both of them to travel to the right and use the top vertex to switch their position. %If we were to use our pruning technique, this would not be possible, making the example unsolvable.
-To mitigate these instances,several strategies are proposed to change which vertices are pruned.
-
+Of course, this pruning does not maintain completeness in general. A simple counterexample is given in Figure~\ref{fig:m_counterexample}. The two agents want to swap their location (ie. their goal location is identical with the starting location of the other agent). To do this, the only solution is for both of them to travel to the right and use the top vertex to switch their position. %If we were to use our pruning technique, this would not be possible, making the example unsolvable.
+To mitigate these instances, several strategies are proposed to change which vertices are pruned.
+%
 \begin{figure}[ht]
 \centering
 \includegraphics[width=0.45\columnwidth]{img/m_counterexample.png}
 \caption{An instance with two agents that want to swap their positions.}
 \label{fig:m_counterexample}
 \end{figure}
-
+%
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "main"
@@ -72,7 +68,8 @@ To mitigate these instances,several strategies are proposed to change which vert
 
 %First, we start by explaining the solving strategies used in the initial study on the graph pruning technique [citation omitted].%~\cite{TODO}.
 
-We will use the following notations. Let $SP_i$ be the vertices on a chosen shortest path for agent $a_i \in A$ (ie. a single shortest path from $s_i$ to $g_i$). The length of the path is $|SP_i|$. The union of vertices on the shortest paths of all agents is $SP_A = \bigcup_{a_i \in A} SP_i$. Note that for now for each agent we consider just one shortest path. If multiple shortest paths exist for an agent, one is chosen at random. Given this notation the lower bound on makespan of an instance $\inst = (G,A)$ can be written as $LB_{mks}(G,A) = \max_{a_i \in A} |SP_i|$. For short, we refer to such lower bound just by $LB$.
+% We use the following notation.
+Let $SP_i$ be the vertices on a chosen shortest path for agent $a_i \in A$ (ie. a single shortest path from $s_i$ to $g_i$). The length of the path is $|SP_i|$. The union of vertices on the shortest paths of all agents is $SP_A = \bigcup_{a_i \in A} SP_i$. Note that for now for each agent we consider just one shortest path. If multiple shortest paths exist for an agent, one is chosen at random. Given this notation the lower bound on makespan of an instance $\inst = (G,A)$ can be written as $LB_{mks}(G,A) = \max_{a_i \in A} |SP_i|$. For short, we refer to such lower bound just by $LB$.
 
 %\begin{figure}[ht]
 %\centering
@@ -92,7 +89,7 @@ The \emph{(k,m)-relaxation} of $\inst$ is the makespan-restricted MAPF instance
 \]
 This relaxation means that instead of the whole graph $G$ we consider only $Gres_k$ and we are finding a solution with extra makespan $m$ -- extra over the lower bound on makespan. Also note that $Gres_k$ is constructed such that $LB_{mks}(G,A) = LB_{mks}(Gres_k,A)$ for any $k$, therefore, we do not need to change the notation of $LB$.
 
-We can build a partial order $\mrelaxle$ over the ($k$,$m$)-relaxations $\mrelax{\inst}{k}{m}$ such that 
+We can build a partial order $\mrelaxle$ over the ($k$,$m$)-relaxations $\mrelax{\inst}{k}{m}$ such that
 \[
 \mrelax{\inst}{k}{m} \mrelaxle \mrelax{\inst}{k'}{m'}
 \]
@@ -128,7 +125,7 @@ The generic algorithm to solve MAPF using the relaxed instances is as follows. F
 
 \subsubsection{Baseline Strategy}
 
-The classical approach to solving MAPF makespan optimally can be expressed in the relaxed instances as follows. We start with an initial candidate of $k_{max}$ (ie. the whole graph $G$) and $m=0$. If the relaxed instance is unsolvable, only the additional makespan is increased as $m=m+1$. %In terms of the Figure~\ref{fig:example-relax}, the first solved relaxation is $\mrelax{\inst}{3}{0}$ and then we are moving only to the right-hand side. 
+The classical approach to solving MAPF makespan optimally can be expressed in the relaxed instances as follows. We start with an initial candidate of $k_{max}$ (ie. the whole graph $G$) and $m=0$. If the relaxed instance is unsolvable, only the additional makespan is increased as $m=m+1$. %In terms of the Figure~\ref{fig:example-relax}, the first solved relaxation is $\mrelax{\inst}{3}{0}$ and then we are moving only to the right-hand side.
 We shall refer to this strategy as \emph{baseline} or \ssb{} for short.
 
 \begin{prop}\label{prop:baseline}
@@ -156,12 +153,12 @@ The first smarter solution is to keep only the vertices on the shortest paths an
 
 On the other hand, in most cases, this simple strategy can find a solution, and due to the great reduction of vertices of the graph, the solution may be found quickly. We choose to start with $k=1$ rather than $k=0$ to increase the probability for a solution to exist while keeping the number of vertices to a minimum.
 
-%In terms of Figure~\ref{fig:example-relax}, the strategy first moves to the left once and then only to the right. 
+%In terms of Figure~\ref{fig:example-relax}, the strategy first moves to the left once and then only to the right.
 
 
 \subsubsection{Prune-and-cut Strategy}
 
-The previous strategies either use unnecessary large restricted graph or do not guarantee to find a solution. Strategy \emph{prune-and-cut} (\ssp{} for short) guarantees both completeness and optimality. We start with initial candidate $k=0$ and $m=0$. In case the relaxed instance is unsolvable, we cannot be sure if the reason is the restriction on $k$ or on $m$. However, since we do not want to overestimate $m$, we first need to increase $k$ potentially up to $k_{max}$. Once a restricted instance $\mrelax{\inst}{k_{max}}{m}$ is unsolvable, we are sure that $m$ needs to be increased. %Since we proved that we require at least $m+1$ extra makespan, 
+The previous strategies either use unnecessary large restricted graph or do not guarantee to find a solution. Strategy \emph{prune-and-cut} (\ssp{} for short) guarantees both completeness and optimality. We start with initial candidate $k=0$ and $m=0$. In case the relaxed instance is unsolvable, we cannot be sure if the reason is the restriction on $k$ or on $m$. However, since we do not want to overestimate $m$, we first need to increase $k$ potentially up to $k_{max}$. Once a restricted instance $\mrelax{\inst}{k_{max}}{m}$ is unsolvable, we are sure that $m$ needs to be increased. %Since we proved that we require at least $m+1$ extra makespan,
 we can optimistically assume that the whole $Gres_{k_{max}}$ is not needed and we restrict the graph back to $k=0$ producing $\mrelax{\inst}{0}{m+1}$.
 
 
@@ -213,4 +210,3 @@ If a MAPF instance $\inst$ has a solution, \emph{combined} strategy is guarantee
 %%% mode: latex
 %%% TeX-master: "main"
 %%% End:
-

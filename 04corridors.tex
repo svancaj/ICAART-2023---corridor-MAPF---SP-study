@@ -26,25 +26,25 @@ Both of the above improvements maintain completeness and optimality. However, th
 \label{fig:diagonal_example}
 \end{figure}
 %
-%Another example where this approach is helpful can be seen in Figure~\ref{fig:two_agents}. The two agents have different lengths of shortest paths. For the orange agent with the longer path, preprocessing correctly finds the only shortest path. However, the blue agent with a much shorter path may move anywhere in the shaded area since it has enough time. Recall that we are computing makespan optimal solutions, so we are interested in the timestep when all agents are at their goal locations. This time is prolonged by the orange agent, therefore the blue agent has many more choices. If we use our pruning technique the number of choices reduces dramatically. The blue agent can still choose when to move to the goal location, or even move back and forth a few times, however, it may use significantly fewer vertices.
+%Another example can be seen in Figure~\ref{fig:two_agents}. The two agents have different lengths of shortest paths. For the orange agent with the longer path, the preprocessing correctly finds the only shortest path. However, the blue agent with a much shorter path may move anywhere in the shaded area. Recall that we are computing makespan optimal solutions, so we are interested in the timestep when all agents are at their goal locations. If we use the pruning technique the number of choices again reduces dramatically. The blue agent can still choose when to move to the goal location, or even move back and forth a few times, however, it may use significantly fewer vertices.
 %
 %\begin{figure}[ht]
 %\centering
-%\hspace{0.8cm}
-%\begin{subfigure}{0.3\columnwidth}
+%\hspace{0.9cm}
+%\begin{subfigure}{0.25\columnwidth}
 %\centering
 %\includegraphics[width=\textwidth]{img/two-agents.png}
 %\caption{}
 %\label{fig:two_agents}
 %\end{subfigure}
 %\hfill
-%\begin{subfigure}{0.3\columnwidth}
+%\begin{subfigure}{0.25\columnwidth}
 %\centering
 %\includegraphics[width=\textwidth]{img/two-agents-path.png}
 %\caption{}
 %\label{fig:two_agents_path}
 %\end{subfigure}
-%\hspace{0.8cm}
+%\hspace{0.9cm}
 %\caption{An instance with two agents, one with longer path allowing the other to move more freely.}
 %\label{fig:two_agents_example}
 %\end{figure}
